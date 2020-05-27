@@ -16,23 +16,50 @@
         github: 'https://github.com/nytimes/std-cat',
         edDraftURI: 'https://nytimes.github.io/std-cat/',
         shortName: 'cat',
+        localBiblio: {
+          CAROUSEL: {
+            title: 'Carousels: A History',
+            href: 'https://twitter.com/heydonworks/status/986918827857506304',
+            authors: ['Heydon Pickering'],
+            date: '19 April 2018',
+            status: 'Final Word',
+          },
+        },
       };
     </script>
   </head>
   <body>
     <section id="abstract">
       <p>
-        This document describes a set of technologies that can be used together to support content
-        aggregation as practiced today on the Web by search engines, social media, and syndication
-        services, in a manner that follows the
-        <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">Priority of Constituencies</a>
-        notably in providing privacy for users as well as simplicity and control for authors (also
-        often known as "<em>publishers</em>") [[html-design-principles]].
+        This document analyses the respective merits of different approaches to content aggregation
+        on the Web, and builds atop this comparative analysis to outline an architecture and
+        requirements for a technology to support content aggregation as practiced today on the Web
+        by search engines, social media, and syndication services, in a manner that follows the
+        <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">Priority
+        of Constituencies</a>, notably in privileging user experience, user privacy, as well as
+        simplicity and control for authors (also often known as "<em>publishers</em>")
+        [[html-design-principles]].
       </p>
     </section>
-    <section id="sotd">
+    <section id="sotd"></section>
+    <section>
+      <h2>Introduction</h2>
       <p>
         Tk
+        A core value of the Web is linking.
+        This initially enabled the separation of discoverability from distribution: you could curate
+        lists of content simply by linking to that content, but the publisher remained in control of
+        their own distribution, with all the advantages that implies in terms of improved user
+        experience, disintermediation, and privacy.
+        This lead to an environment in which the relationship between discoverability services and
+        publishers stood at the mutualistic end of the mutualistic-parasitic axis.
+        As the market power of discoverability services has steadily increased, the digital
+        environment has become one in which publishers have increasingly lost the ability to
+        manage the distribution of their own content (AMP, etc.).
+        SXG tries to make distribution look like linking. As such, it does present improvements, but
+        it is a major architectural change performed to solve a problem that it only created if
+        discoverability intermediaries insist on carrying the content themselves. This problem can
+        be solved equally well through linking.
       </p>
     </section>
     <section>
@@ -72,7 +99,7 @@
             &lt;portal src="https://berjon.com/the-confusion/">
               &lt;template>
                 &lt;article>
-                  &lt;h1>&lt;slot name="bundle.title">Untitled&lt;/slot>&lt;/h1>
+                  &lt;h1>&lt;slot name="bundle.name">Untitled&lt;/slot>&lt;/h1>
                   &lt;slot name="bundle.image">&lt;img src="generic-site.png">&lt;/slot>
                   &lt;p>&lt;slot name="bundle.description">&lt;/slot>&lt;/p>
                 &lt;/article>
@@ -86,14 +113,56 @@
         </li>
         <li>
           A <code>portal</code> supports CSS states such that it can be styled as "loading" or in
-          error.
+          "error". It should also have an "activated" state that is never rendered (since the site
+          takes over) but that can be transitioned to with an animation.
         </li>
         <li>
           Portals should support
           <a href="https://wicg.github.io/ad-click-attribution/index.html">Private Click Measurement</a>.
         </li>
+        <li>
+          Metadata entry in bundles (same as for primary entry); fall back to processing the primary
+          HTML resource.
+        </li>
+        <li>
+          Use schema.org.
+        </li>
+        <li>
+          Use a set of machine-readable licenses that work for us.
+        </li>
+        <li>
+          Hooks for a wallet-based sub standard?
+        </li>
+        <li>
+          Note that providing a carousel of live sites is explicitly not a use case as that is
+          hostile to publishers since it allows a site to constrain the navigation of another. This
+          is an aggressively hostile takeover practice that should not be condoned by the Web
+          architecture.
+        </li>
+        <li>
+          Could <code>portal</code> be made extensible to other rendering modes?
+        </li>
+        <li>
+          Should we try to use <code>portal</code> for declarative ads? It's probably better to make
+          the navigation method reusable by an <code>ad</code> element. Also, the <code>ad</code>
+          element should <em>not</em> have a way to get to its predecessor.
+        </li>
+        <li>
+          Privacy-preserving fetch from search engine in order to preload bundle previews. Limit it
+          to previews so that we don't run into paywall issues.
+        </li>
       </ul>
     </section>
+    <!--
+      - clearly define SXG as deceptive
+      - explain that there are three models:
+        * links
+        * load content from aggregator, violate user privacy
+        * load content from publisher, violate user privacy less
+      - explain the problem with the fact that an aggregator can self-preference by maintaining user
+        identity in a <portal> that loads a bundle, that then can easily be reidentified if ads are
+        loaded from the aggregator too
+    -->
 
     <!--
     <portal src="https://berjon.com/the-confusion/">
