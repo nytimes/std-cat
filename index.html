@@ -49,12 +49,22 @@
             authors: ['Facebook'],
             status: 'Proprietary Format',
           },
+          'OPEN-STAND': {
+            title: 'Open Stand: Global Advocates for Open Standards & Technology Development',
+            href: 'https://open-stand.org/',
+            authors: ['IAB', 'IEEE', 'IETF', 'ISOC', 'W3C'],
+          },
           'RSS-MEDIA-TYPE': {
             title: 'The application/rss+xml Media Type draft-nottingham-rss-media-type-00',
             href: 'https://tools.ietf.org/id/draft-nottingham-rss-media-type-00.txt',
             authors: ['Mark Nottingham'],
             date: '23 October 2001',
             status: 'Expired',
+          },
+          'SEEING-LIKE-A-STATE': {
+            title: 'Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed',
+            href: 'https://bookshop.org/books/seeing-like-a-state-how-certain-schemes-to-improve-the-human-condition-have-failed/9780300246759',
+            authors: ['James C. Scott'],
           },
           WP: {
             title: 'Web Packages',
@@ -90,7 +100,7 @@
       <h2>Introduction</h2>
       <p>
         "<em>A defining characteristic of the Web is that it allows embedded references to other
-        resources</em>" [[!webarch]]. As such, content aggregation — the curation of lists of
+        resources</em>" [[webarch]]. As such, content aggregation — the curation of lists of
         content external to one's control — is as old as the Web itself and has gone through
         multiple embodiments over the decades. This historical perspective allows us to tease out
         best practices from ones that produce problematic outcomes.
@@ -130,167 +140,377 @@
     <section>
       <h2>Assessment Methodology</h2>
       <p>
-        Tk
+        In comparing solutions for aggregation we rely on the following properties:
       </p>
+      <dl>
+        <dt>User Experience</dt>
+        <dd>
+          This is measured based on whether the proposal keeps the full capabilities of the Web
+          platform available or if it degrades user experience by enforcing a subset of the
+          platform. Values on this dimension can be <em>optimal</em> just in case the full power of
+          the Web platform is available in service of the user's experience, or <em>degraded</em>
+          if the user experience is limited to a subset of the platform.
+        </dd>
+        <dt>User Privacy</dt>
+        <dd>
+          For simplicity, we treat violations of privacy as any information that leaks outside of
+          the direct relationship between the user on one side and the first party and its service
+          providers on the other (as defined in [[tracking-dnt]]). Values can be <em>optimal</em>
+          just in case user privacy is not worsened by the aggregation architecture (endemic
+          problems of privacy on the Web notwithstanding), or <em>degraded</em> if the architecture
+          specifically makes privacy worse.
+        </dd>
+        <dt>Content Preview</dt>
+        <dd>
+          This property indicates whether the aggregation architecture inherently lends itelf to
+          providing a rich preview for the content or if previews have to be built in an ad hoc
+          manner. The values are, respectively, <em>supported</em> or <em>ad hoc</em>.
+        </dd>
+        <dt>Preloading</dt>
+        <dd>
+          Whether effective preloading of the content, intended to speed up click-through, can
+          easily be supported. Values: <em>supported</em> and <em>not supported</em>.
+        </dd>
+        <dt>Publisher Level of Effort</dt>
+        <dd>
+          Several of the existing aggregations solutions ([[AMP]], [[APPLE-NEWS-FORMAT]], [[FBIA]],
+          [[WP]]) function by forcing publishers to take on the work to optimise aggregator
+          platforms under threats of losing their traffic or revenue. The philosophy of this
+          document is encourage the development of an ecosystem that pushes towards the mutualistic
+          end of the mutualistic-parasitic axis. Accordingly, the values along this dimension can be
+          either <em>reasonable</em> when the publisher has simply to produce the content alongside
+          possibly some moderate effort to render it machine-readable, or <em>exploitative</em>
+          when the architecture levies work from publishers that is intended solely or primarily to
+          optimise the aggregator's platform.
+        </dd>
+      </dl>
     </section>
     <section>
       <h2>Potential Architectures</h2>
       <p>
-        Tk
+        There is substantial historical precedent in content aggregation on the Web. However, it
+        does not seem necessary to produce a detailed investigation of each past technology. We can
+        instead outline three major architectures: the traditional one on which the Web was built,
+        the one that has come to dominate in recent years and which the standards community wishes
+        to improve upon, and one grounded in a consensus approach to Web architecture that addresses
+        the limitations of the traditional model. Experience with historical examples can serve to
+        illustrate various aspects of each architecture.
       </p>
       <section>
         <h2>Links</h2>
         <p>
-          Tk
+          Links are the original embodiment of content aggregation and remain the gold standard for
+          content curation on the Web. Any viable solution should improve upon linking.
         </p>
         <p>
-          Tk
-          This initially enabled the separation of discoverability from distribution: you could curate
-          lists of content simply by linking to that content, but the publisher remained in control of
-          their own distribution, with all the advantages that implies in terms of improved user
-          experience, disintermediation, and privacy.
-          This lead to an environment in which the relationship between discoverability services and
-          publishers stood at the mutualistic end of the mutualistic-parasitic axis.
-          As the market power of discoverability services has steadily increased, the digital
-          environment has become one in which publishers have increasingly lost the ability to
-          manage the distribution of their own content (AMP, etc.).
-          SXG tries to make distribution look like linking. As such, it does present improvements, but
-          it is a major architectural change performed to solve a problem that it only created if
-          discoverability intermediaries insist on carrying the content themselves. This problem can
-          be solved equally well through linking.
+          Linking enables a fundamental architectural property of the Web which is the separation
+          of discoverability from distribution. This powerful feature is grounded in URLs, which are
+          the defining architectural decision of the Web and what initially set it apart from other
+          hypertext systems (of which there were many).
         </p>
+        <p>
+          According to our methodology, links have the following properties:
+        </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>User Experience</th>
+              <td><var>optimal</var></td>
+              <td>
+                The full power of the Web platform is available; in fact this is the expectations of
+                how the Web platform is intended to work.
+              </td>
+            </tr>
+            <tr>
+              <th>User Privacy</th>
+              <td><var>optimal</var></td>
+              <td>
+                The user has distinct and clearly delineated relationships with separate first
+                parties being the aggregator and the publisher (especially with judicious
+                application of a <code>Referrer-Policy</code> [[referrer-policy]]).
+              </td>
+            </tr>
+            <tr>
+              <th>Content Preview</th>
+              <td><var>ad hoc</var></td>
+              <td>
+                While some de facto systems exist to provide metadata that enables limited content
+                previewing (primarily in the form of "cards" intended for social media usage), there
+                is currently no evident standard that could enable content preview simply from
+                linking.
+              </td>
+            </tr>
+            <tr>
+              <th>Preloading</th>
+              <td><var>not supported</var></td>
+              <td>
+                Any manner of preloading would be entirely ad hoc.
+              </td>
+            </tr>
+            <tr>
+              <th>Publisher LoE</th>
+              <td><var>reasonable</var></td>
+              <td>
+                All that the publisher needs to do is publish.
+              </td>
+            </tr>
+          </tbody>
+          <caption>Assessment of the <em>Link</em> architecture</caption>
+        </table>
       </section>
       <section>
         <h2>Aggregator-Dominated Bundling</h2>
         <p>
-          Tk
+          In recent years, as the Internet became increasingly concentrated around a small number of
+          extremely powerful actors, the Web's dominant content aggregation architecture has shifted
+          towards proprietary formats imposed by aggregators in furtherance of their own
+          preferences. These share a set of broad characteristics:
         </p>
+        <ul>
+          <li>
+            They attempt to limit what the Web platform can do. This helps aggregators treat content
+            as a fungible commodity rather than as differentiated production grounded in craft. They
+            also privilege aggregators (and runaway scale) by favouring <em>legibility</em> of the
+            content over <em>expressivity</em> [[SEEING-LIKE-A-STATE]].
+          </li>
+          <li>
+            They tend to optimise characteristics that define the aggregator/user relationship
+            (particularly performance or uniformity) over those that prevail in publisher/user
+            relationship (experience). Put differently, they constitute a faster way to deliver a
+            degraded experience.
+          </li>
+          <li>
+            They make publisher perform the work to optimise the aggregator's offering as a levvy
+            that must be discharged to maintain traffic or revenue. Little value is derived from the
+            aggragation architecture itself, and in fact "<em>several online publishers indicated
+            that if it weren't for the privileged position in the Google Search carousel given to
+            AMP content, they would not publish in that format.</em>" [[rfc8752]]
+          </li>
+        </ul>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>User Experience</th>
+              <td><var>degraded</var></td>
+              <td>
+                Every technology in this architecture class degrades the user experience by limiting
+                the capabilities of the Web platform to those deemed useful and legible by the
+                aggregator. Web Packages [[WP]] attempts principally to solve this issue.
+              </td>
+            </tr>
+            <tr>
+              <th>User Privacy</th>
+              <td><var>degraded</var></td>
+              <td>
+                Technologies in this group try to shift relationships that users expect to have with
+                publishers to aggregators, sometimes even providing deceptive indications regarding
+                the URL from which the content is served, leading data to leak from a publisher
+                context to an aggregator context.
+              </td>
+            </tr>
+            <tr>
+              <th>Content Preview</th>
+              <td><var>supported</var></td>
+              <td>
+                The legibility enables higher-quality preview of content. In some cases, essentially
+                the full content is loaded into a carousel but this use case is not considered here
+                because overriding another party's interaction modalities is considered excessively
+                hostile compared to the decisively consensual philosophy of this document.
+                [[CAROUSEL]]
+              </td>
+            </tr>
+            <tr>
+              <th>Preloading</th>
+              <td><var>supported</var></td>
+              <td>
+                The blurring of discoverability and distribution directly delivers the ability to
+                preload content.
+              </td>
+            </tr>
+            <tr>
+              <th>Publisher LoE</th>
+              <td><var>exploitative</var></td>
+              <td>
+                Since these formats are entirely ad hoc and primarily focused on aggragator use
+                cases, publishers have to work to optimise aggregators' platforms.
+              </td>
+            </tr>
+          </tbody>
+          <caption>Assessment of the <em>Aggregator-Dominated</em> architecture</caption>
+        </table>
       </section>
       <section>
         <h2>Cooperative Syndication</h2>
         <p>
-          Tk
+          Both the <a href="#links">Links</a> and the
+          <a href="#aggregator-dominated-bundling">Aggregator-Dominated</a> approaches have
+          different shortcomings. The approach advocated by the <em>Cooperative Syndication</em>
+          aggragation architecture stems from multiple principles:
         </p>
+        <ul>
+          <li>
+            It should be the product of consensus amongst the various constituencies of the Web so
+            as to reflect a healthy balance of power in the global digital ecosystem and not
+            imposed unilaterally by a single actor simply by dint of overwhelming market power. This
+            is essentially a return to Open Stand principles in lieu of monopoly power.
+            [[OPEN-STAND]]
+          </li>
+          <li>
+            It should maintain the architectural values supported by URLs in general, and the
+            discoverability/distribution distinction in particular.
+          </li>
+          <li>
+            It should proceed through
+            <a href="https://www.w3.org/TR/html-design-principles/#evolution-not-revolution">evolution,
+            not revolution</a>: do not make massive architectural changes to address simple
+            problems, but instead try to
+            <a href="https://www.w3.org/TR/html-design-principles/#support-existing-content">support
+            existing content</a>, to
+            <a href="https://www.w3.org/TR/html-design-principles/#do-not-reinvent-the-wheel">pave
+            the cowpaths</a>, and
+            <a href="https://www.w3.org/TR/html-design-principles/#do-not-reinvent-the-wheel">not to
+            reinvent the wheel</a>. [[html-design-principles]]
+          </li>
+        </ul>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>User Experience</th>
+              <td><var>optimal</var></td>
+              <td>
+                This is the Web platform.
+              </td>
+            </tr>
+            <tr>
+              <th>User Privacy</th>
+              <td><var>optimal</var></td>
+              <td>
+                The user has distinct and clearly delineated relationships with separate first
+                parties being the aggregator and the publisher (especially with judicious
+                application of a <code>Referrer-Policy</code> [[referrer-policy]]).
+              </td>
+            </tr>
+            <tr>
+              <th>Content Preview</th>
+              <td><var>supported</var></td>
+              <td>
+                An existing ecosystem of metadata, principally stemming from social media "card"
+                languages as well as from schema.org [[schema-org]] exists and is waiting for
+                nothing more than some further formalisation and extensions to render it more
+                powerful. The following section provides some examples of the direction in which
+                these existing capabilities could be developed.
+              </td>
+            </tr>
+            <tr>
+              <th>Preloading</th>
+              <td><var>supported</var></td>
+              <td>
+                This is a relatively more difficult feature to develop, however it can usefully be
+                approached in a generic manner. Prefetching using stateless requests and IP privacy
+                can already go a long way towards addressing the issue. Publishers could further
+                rely on bundling (unsigned, simply served from their domain) to enable more
+                effective prefetching.
+              </td>
+            </tr>
+            <tr>
+              <th>Publisher LoE</th>
+              <td><var>reasonable</var></td>
+              <td>
+                Under this architecture, the bulk of work that publishers need to carry out is to
+                enhance their existing content with better machine-readable metadata, and possibly
+                with some bundling that they could themselves use on their own sites. Overall, this
+                presents a reasonable increase compared to linking and a substantial improvement
+                over aggragator-dominated bundling.
+              </td>
+            </tr>
+          </tbody>
+          <caption>Assessment of the <em>Collaborative Syndication</em> architecture</caption>
+        </table>
       </section>
     </section>
     <section>
       <h2>Requirements for Cooperative Syndication</h2>
       <p>
-        Tk
+        Further discussion on the community's preferred architecture are warranted before too much
+        work is invested into outlining detailed requirements. Some aspects of the Cooperative
+        architecture are nevertheless worth calling out early, even if only in outline at this
+        stage.
       </p>
+      <section>
+        <h2>Standardising Card Preview</h2>
+        <p>
+          Multiple ways exist on today's Web to provide preview capabilities through "cards", used
+          on social networks such as Facebook and Twitter, and reused by other parts of the
+          ecosystem (eg. Slack or Keybase). Additionally, the schema.org language [[schema-org]],
+          incarnated through multiple syntaxes, is broadly used in content.
+        </p>
+        <p>
+          These machine-readable (though at times presentation-oriented) features are enough to
+          support user-friendly content preview and can be extended further.
+        </p>
+      </section>
+      <section>
+        <h2>Improved Privacy-Preserving Prefetch</h2>
+        <p>
+          Rather than relying on blurring the distinction between discoverability and distribution
+          as today's aggragator-dominated architecture tends to (and Web Packages furthers), the
+          Web would be better-served by improvements to standard prefetching capabilities. Notably,
+          publishers would be incentivised to collaborate with prefetching if it aligns with their
+          own distribution being faster. This could include providing bundles
+          (unsigned, served directly).
+        </p>
+        <p>
+          Additionally, user agents should be encouraged to develop support for IP privacy in
+          service of their users' reasonable expectations of privacy. Such a feature, while generic,
+          would also help support privacy-preserving prefetches.
+        </p>
+      </section>
+      <section>
+        <h2>Transmissible Entitlement Tokens</h2>
+        <p>
+          Some systems exist that enable forms of profit sharing between aggregators and publishers.
+          These can follow multiple models such as subscriptions (Subscribe with Google),
+          subsidising publishers to make some of their content available (Facebook News Tab), or
+          sharing a tiny fraction of the revenue from content aggregator's bundle (Apple News Plus).
+        </p>
+        <p>
+          The ecosystem would globally benefit from enabling aggregators and publishers to share
+          entitlement tokens that would prove that a given user is entitled to specific access.
+          This could take the form of a non-fungible token or of some sort of nonce provided as
+          part of the aggregator's linking to the publisher (possibly mediated by the user agent).
+        </p>
+      </section>
+      <section>
+        <h2>Machine-Readable Distribution Licenses</h2>
+        <p>
+          The terms under which aggregators use and reuse publisher content are often decided
+          unilaterally. This could be improved for instance through the provision of
+          machine-readable licenses that could for instance allow citation for the purpose of
+          linking but not to provide direct answers, or could grant reuse rights for some pictures
+          as part of a portal but not rights to mine the text to train digital assistants with.
+        </p>
+      </section>
     </section>
-    <!--
-      - clearly define SXG as deceptive
-      - explain that there are three models:
-        * links
-        * load content from aggregator, violate user privacy
-        * load content from publisher, violate user privacy less
-      - explain the problem with the fact that an aggregator can self-preference by maintaining user
-        identity in a <portal> that loads a bundle, that then can easily be reidentified if ads are
-        loaded from the aggregator too
-      NOTES
-
-      <p>
-        Rather than have publishers provide labour for aggregators (search, social, syndicators),
-        this document establishes a standard enabling aggregation such that minimal investment is
-        necessary on the side of publishers while maximal quality is ensured in terms of user
-        experience.
-      </p>
-      <p>
-        Tk privacy, easy, why not RSS/Atom
-      </p>
-      <p>
-        Tk the basic way in which this works is:
-      </p>
-      <ul>
-        <li>
-          The signal that content is available for aggregation is the use of a bundle
-          [[!web-packaging]].
-        </li>
-        <li>
-          A <code>portal</code> element can be used to point to a bundle. However when that happens
-          the bundle itself is not rendered but rather a <a>card view</a> of it is. The user agent
-          may of course at that point prefetch the bundle so as to be ready to render it quickly
-          when the <code>portal</code> is activated.
-        </li>
-        <li>
-          <p>
-            The card view is generated by bundle metadata and fed into a portal template to render
-            the card.
-          </p>
-          <pre class="example">
-            &lt;portal src="https://berjon.com/the-confusion/">
-              &lt;template>
-                &lt;article>
-                  &lt;h1>&lt;slot name="bundle.name">Untitled&lt;/slot>&lt;/h1>
-                  &lt;slot name="bundle.image">&lt;img src="generic-site.png">&lt;/slot>
-                  &lt;p>&lt;slot name="bundle.description">&lt;/slot>&lt;/p>
-                &lt;/article>
-              &lt;/template>
-              ...fallback...
-            &lt;/portal>
-          </pre>
-        </li>
-        <li>
-          Bundle preloads are made using stateless requests.
-        </li>
-        <li>
-          A <code>portal</code> supports CSS states such that it can be styled as "loading" or in
-          "error". It should also have an "activated" state that is never rendered (since the site
-          takes over) but that can be transitioned to with an animation.
-        </li>
-        <li>
-          Portals should support
-          <a href="https://wicg.github.io/ad-click-attribution/index.html">Private Click Measurement</a>.
-        </li>
-        <li>
-          Metadata entry in bundles (same as for primary entry); fall back to processing the primary
-          HTML resource.
-        </li>
-        <li>
-          Use schema.org.
-        </li>
-        <li>
-          Use a set of machine-readable licenses that work for us.
-        </li>
-        <li>
-          Hooks for a wallet-based sub standard?
-        </li>
-        <li>
-          Note that providing a carousel of live sites is explicitly not a use case as that is
-          hostile to publishers since it allows a site to constrain the navigation of another. This
-          is an aggressively hostile takeover practice that should not be condoned by the Web
-          architecture.
-        </li>
-        <li>
-          Could <code>portal</code> be made extensible to other rendering modes?
-        </li>
-        <li>
-          Should we try to use <code>portal</code> for declarative ads? It's probably better to make
-          the navigation method reusable by an <code>ad</code> element. Also, the <code>ad</code>
-          element should <em>not</em> have a way to get to its predecessor.
-        </li>
-        <li>
-          Privacy-preserving fetch from search engine in order to preload bundle previews. Limit it
-          to previews so that we don't run into paywall issues.
-        </li>
-    -->
-
-    <!--
-    <portal src="https://berjon.com/the-confusion/">
-      <template>
-        <article>
-          <h1>{title || "Untitled"}</h1>
-          <img src={image || "generic-site.png"}>
-          <p>{description}</p>
-        </article>
-      </template>
-      ...fallback...
-    </portal>
-    We want:
-    • portal
-    •
-    -->
-    <section id="conformance"></section>
   </body>
 </html>
