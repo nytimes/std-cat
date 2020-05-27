@@ -17,6 +17,18 @@
         edDraftURI: 'https://nytimes.github.io/std-cat/',
         shortName: 'cat',
         localBiblio: {
+          AMP: {
+            title: 'Accelerated Mobile Pages',
+            href: 'https://amp.dev/',
+            authors: ['Google'],
+            status: 'Proprietary Format',
+          },
+          'APPLE-NEWS-FORMAT': {
+            title: 'Apple News Format',
+            href: 'https://developer.apple.com/documentation/apple_news/apple_news_format',
+            authors: ['Apple'],
+            status: 'Proprietary Format',
+          },
           CAROUSEL: {
             title: 'Carousels: A History',
             href: 'https://twitter.com/heydonworks/status/986918827857506304',
@@ -30,7 +42,27 @@
             authors: ['Castedo Ellerman'],
             date: '09 March 1997',
             status: 'Member Submission',
-          }
+          },
+          FBIA: {
+            title: 'Facebook Instant Articles',
+            href: 'https://developers.facebook.com/docs/instant-articles',
+            authors: ['Facebook'],
+            status: 'Proprietary Format',
+          },
+          'RSS-MEDIA-TYPE': {
+            title: 'The application/rss+xml Media Type draft-nottingham-rss-media-type-00',
+            href: 'https://tools.ietf.org/id/draft-nottingham-rss-media-type-00.txt',
+            authors: ['Mark Nottingham'],
+            date: '23 October 2001',
+            status: 'Expired',
+          },
+          WP: {
+            title: 'Web Packages',
+            href: 'https://github.com/WICG/webpackage',
+            authors: ['Jeffrey Yasskin'],
+            date: '07 May 2020',
+            status: 'Draft (index page for split specification)',
+          },
         },
       };
     </script>
@@ -65,9 +97,34 @@
       </p>
     </section>
     <section>
-      <h2>Overview of Existing Solutions</h2>
+      <h2>Brief Overview of Existing Solutions</h2>
       <p>
-        Tk
+        The initial aggregation format is simply HTML [[HTML]], which with its hypertext linking
+        capabilities has enabled the curation resources since its inception. Widespread interest in
+        allowing publishers to "push" content to users led to a codification of publisher/reader
+        interactions in open protocols such as the Channel Definition Format [[CDF-SUBM]], the RDF
+        Site Summary (later rebranded as Rich Site Summary and Really Simple Syndication)
+        [[RSS-MEDIA-TYPE]], and Atom [[rfc4287]]. These formats mix machine-readable metadata about
+        content which makes it easy to present lists of resources in a user-friendly manner, links
+        to the content, and sometimes the possibility to include the entirety of the source as HTML
+        (depending on publisher choice).
+      </p>
+      <p>
+        In more recent times, a flurry of aggregator-dominated formats have emerged. They feature
+        varying degrees of sophistication but have in common that they require publishers to recast
+        their content into a language covering a subset of the Web platform that can be limited, as
+        is the case with Accelerated Mobile Pages defined by Google and also used by Microsoft Bing
+        and Twitter [[AMP]], or severely limited, as with the Apple New Format [[APPLE-NEWS-FORMAT]]
+        or Facebook Instant Articles [[FBIA]]. These technologies have slightly different areas of
+        focus, which can be bundling for portals (AMP), for apps (ANF), or for social media (FBIA)
+        but from the perspective of users and publishers they are more alike than different as a
+        set of proprietary formats with largely comparable properties.
+      </p>
+      <p>
+        A more recent proposal, Web Packages [[WP]], has recently been discussed by the Web and
+        Internet communities. It attempts to make content distribution <em>look like</em> content
+        linking. While this does lead to some improvements (as discussed below) this proposal has
+        yet to garner any consensus.
       </p>
     </section>
     <section>
