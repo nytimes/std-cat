@@ -24,6 +24,13 @@
             date: '19 April 2018',
             status: 'Final Word',
           },
+          'CDF-SUBM': {
+            title: 'Channel Definition Format (CDF)',
+            href: 'https://www.w3.org/TR/NOTE-CDFsubmit.html',
+            authors: ['Castedo Ellerman'],
+            date: '09 March 1997',
+            status: 'Member Submission',
+          }
         },
       };
     </script>
@@ -40,33 +47,92 @@
         simplicity and control for authors (also often known as "<em>publishers</em>")
         [[html-design-principles]].
       </p>
+      <p>
+        Content aggregation involves every constituency of the Web. A core goal of this document is
+        to provide a backbone to elaborate content aggregation solutions that prioritise consensus
+        over the unilateral imposition of technology through excessive market power.
+      </p>
     </section>
     <section id="sotd"></section>
     <section>
       <h2>Introduction</h2>
       <p>
-        Tk
-        A core value of the Web is linking.
-        This initially enabled the separation of discoverability from distribution: you could curate
-        lists of content simply by linking to that content, but the publisher remained in control of
-        their own distribution, with all the advantages that implies in terms of improved user
-        experience, disintermediation, and privacy.
-        This lead to an environment in which the relationship between discoverability services and
-        publishers stood at the mutualistic end of the mutualistic-parasitic axis.
-        As the market power of discoverability services has steadily increased, the digital
-        environment has become one in which publishers have increasingly lost the ability to
-        manage the distribution of their own content (AMP, etc.).
-        SXG tries to make distribution look like linking. As such, it does present improvements, but
-        it is a major architectural change performed to solve a problem that it only created if
-        discoverability intermediaries insist on carrying the content themselves. This problem can
-        be solved equally well through linking.
+        "<em>A defining characteristic of the Web is that it allows embedded references to other
+        resources</em>" [[!webarch]]. As such, content aggregation — the curation of lists of
+        content external to one's control — is as old as the Web itself and has gone through
+        multiple embodiments over the decades. This historical perspective allows us to tease out
+        best practices from ones that produce problematic outcomes.
       </p>
     </section>
     <section>
-      <h2>Requirements</h2>
+      <h2>Overview of Existing Solutions</h2>
       <p>
         Tk
       </p>
+    </section>
+    <section>
+      <h2>Assessment Methodology</h2>
+      <p>
+        Tk
+      </p>
+    </section>
+    <section>
+      <h2>Potential Architectures</h2>
+      <p>
+        Tk
+      </p>
+      <section>
+        <h2>Links</h2>
+        <p>
+          Tk
+        </p>
+        <p>
+          Tk
+          This initially enabled the separation of discoverability from distribution: you could curate
+          lists of content simply by linking to that content, but the publisher remained in control of
+          their own distribution, with all the advantages that implies in terms of improved user
+          experience, disintermediation, and privacy.
+          This lead to an environment in which the relationship between discoverability services and
+          publishers stood at the mutualistic end of the mutualistic-parasitic axis.
+          As the market power of discoverability services has steadily increased, the digital
+          environment has become one in which publishers have increasingly lost the ability to
+          manage the distribution of their own content (AMP, etc.).
+          SXG tries to make distribution look like linking. As such, it does present improvements, but
+          it is a major architectural change performed to solve a problem that it only created if
+          discoverability intermediaries insist on carrying the content themselves. This problem can
+          be solved equally well through linking.
+        </p>
+      </section>
+      <section>
+        <h2>Aggregator-Dominated Bundling</h2>
+        <p>
+          Tk
+        </p>
+      </section>
+      <section>
+        <h2>Cooperative Syndication</h2>
+        <p>
+          Tk
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>Requirements for Cooperative Syndication</h2>
+      <p>
+        Tk
+      </p>
+    </section>
+    <!--
+      - clearly define SXG as deceptive
+      - explain that there are three models:
+        * links
+        * load content from aggregator, violate user privacy
+        * load content from publisher, violate user privacy less
+      - explain the problem with the fact that an aggregator can self-preference by maintaining user
+        identity in a <portal> that loads a bundle, that then can easily be reidentified if ads are
+        loaded from the aggregator too
+      NOTES
+
       <p>
         Rather than have publishers provide labour for aggregators (search, social, syndicators),
         this document establishes a standard enabling aggregation such that minimal investment is
@@ -151,17 +217,6 @@
           Privacy-preserving fetch from search engine in order to preload bundle previews. Limit it
           to previews so that we don't run into paywall issues.
         </li>
-      </ul>
-    </section>
-    <!--
-      - clearly define SXG as deceptive
-      - explain that there are three models:
-        * links
-        * load content from aggregator, violate user privacy
-        * load content from publisher, violate user privacy less
-      - explain the problem with the fact that an aggregator can self-preference by maintaining user
-        identity in a <portal> that loads a bundle, that then can easily be reidentified if ads are
-        loaded from the aggregator too
     -->
 
     <!--
