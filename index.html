@@ -114,7 +114,7 @@
         capabilities has enabled the curation resources since its inception. Widespread interest in
         allowing publishers to "push" content to users led to a codification of publisher/reader
         interactions in open protocols such as the Channel Definition Format [[CDF-SUBM]], the RDF
-        Site Summary (later rebranded as Rich Site Summary and Really Simple Syndication)
+        Site Summary (later re-branded as Rich Site Summary and Really Simple Syndication)
         [[RSS-MEDIA-TYPE]], and Atom [[rfc4287]]. These formats mix machine-readable metadata about
         content which makes it easy to present lists of resources in a user-friendly manner, links
         to the content, and sometimes the possibility to include the entirety of the source as HTML
@@ -163,7 +163,7 @@
         </dd>
         <dt>Content Preview</dt>
         <dd>
-          This property indicates whether the aggregation architecture inherently lends itelf to
+          This property indicates whether the aggregation architecture inherently lends itself to
           providing a rich preview for the content or if previews have to be built in an ad hoc
           manner. The values are, respectively, <em>supported</em> or <em>ad hoc</em>.
         </dd>
@@ -183,6 +183,17 @@
           possibly some moderate effort to render it machine-readable, or <em>exploitative</em>
           when the architecture levies work from publishers that is intended solely or primarily to
           optimise the aggregator's platform.
+        </dd>
+        <dt>Revenue Model</dt>
+        <dd>
+          An inescapable truth is that publishers and aggregators both need to generate revenue to
+          continue their operations. Revenue is typically generated directly from readers/users
+          (subscriptions) or indirectly (advertising). Privacy and user experience concerns can be
+          leveraged to create limitations on the capabilities of the formats, which can impact
+          which parties are able to monetize the published/aggregated content. Values on this
+          dimension can be <em>open</em>, meaning the creator of the content has full control over
+          how revenue is derived from the work, or <em>limited</em> meaning the creator has to work
+          within artificial constraints.
         </dd>
       </dl>
     </section>
@@ -262,6 +273,15 @@
                 All that the publisher needs to do is publish.
               </td>
             </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>open</var></td>
+              <td>
+                Publishers have full control over the advertising and subscription mechanisms for
+                their content. The onus is fully on publishers to maintain unique infrastructure
+                for their revenue model.
+              </td>
+            </tr>
           </tbody>
           <caption>Assessment of the <em>Link</em> architecture</caption>
         </table>
@@ -288,9 +308,9 @@
             degraded experience.
           </li>
           <li>
-            They make publisher perform the work to optimise the aggregator's offering as a levvy
+            They make publisher perform the work to optimise the aggregator's offering as a levy
             that must be discharged to maintain traffic or revenue. Little value is derived from the
-            aggragation architecture itself, and in fact "<em>several online publishers indicated
+            aggregation architecture itself, and in fact "<em>several online publishers indicated
             that if it weren't for the privileged position in the Google Search carousel given to
             AMP content, they would not publish in that format.</em>" [[rfc8752]]
           </li>
@@ -346,8 +366,17 @@
               <th>Publisher LoE</th>
               <td><var>exploitative</var></td>
               <td>
-                Since these formats are entirely ad hoc and primarily focused on aggragator use
+                Since these formats are entirely ad hoc and primarily focused on aggregator use
                 cases, publishers have to work to optimise aggregators' platforms.
+              </td>
+            </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>limited</var></td>
+              <td>
+                Publishers often have to work within the constraints on advertising instituted by
+                aggregators. Support for subscription or login-controlled content is not
+                present or requires extra optimization on behalf of publishers.
               </td>
             </tr>
           </tbody>
@@ -360,7 +389,7 @@
           Both the <a href="#links">Links</a> and the
           <a href="#aggregator-dominated-bundling">Aggregator-Dominated</a> approaches have
           different shortcomings. The approach advocated by the <em>Cooperative Syndication</em>
-          aggragation architecture stems from multiple principles:
+          aggregation architecture stems from multiple principles:
         </p>
         <ul>
           <li>
@@ -442,7 +471,17 @@
                 enhance their existing content with better machine-readable metadata, and possibly
                 with some bundling that they could themselves use on their own sites. Overall, this
                 presents a reasonable increase compared to linking and a substantial improvement
-                over aggragator-dominated bundling.
+                over aggregator-dominated bundling.
+              </td>
+            </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>open</var></td>
+              <td>
+                Publishers would be free to continue their existing revenue models based on users
+                viewing the full content, supported by unencumbered advertising or subscription
+                model. A collaborative hand-off between aggregators and publishers could be
+                possible using <a href="#transmissible-entitlement-tokens">entitlement tokens</a>.
               </td>
             </tr>
           </tbody>
@@ -470,12 +509,17 @@
           These machine-readable (though at times presentation-oriented) features are enough to
           support user-friendly content preview and can be extended further.
         </p>
+        <p>Other implementations might borrow from or build upon Google's
+           <a href="https://github.com/WICG/portals">portal proposal</a>, allowing publishers
+           to control the presentation of a responsive preview that could conform to the needs
+           of aggregators, while maintaining privacy and performance.
+        </p>
       </section>
       <section>
         <h2>Improved Privacy-Preserving Prefetch</h2>
         <p>
           Rather than relying on blurring the distinction between discoverability and distribution
-          as today's aggragator-dominated architecture tends to (and Web Packages furthers), the
+          as today's aggregator-dominated architecture tends to (and Web Packages furthers), the
           Web would be better-served by improvements to standard prefetching capabilities. Notably,
           publishers would be incentivised to collaborate with prefetching if it aligns with their
           own distribution being faster. This could include providing bundles
