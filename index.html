@@ -163,7 +163,7 @@
         </dd>
         <dt>Content Preview</dt>
         <dd>
-          This property indicates whether the aggregation architecture inherently lends itelf to
+          This property indicates whether the aggregation architecture inherently lends itself to
           providing a rich preview for the content or if previews have to be built in an ad hoc
           manner. The values are, respectively, <em>supported</em> or <em>ad hoc</em>.
         </dd>
@@ -183,6 +183,16 @@
           possibly some moderate effort to render it machine-readable, or <em>exploitative</em>
           when the architecture levies work from publishers that is intended solely or primarily to
           optimise the aggregator's platform.
+        </dd>
+        <dt>Revenue Model</dt>
+        <dd>
+          An inescapable truth is that publishers and aggregators both need to generate revenue to
+          continue their operations. Privacy and user experience concerns can be leveraged to
+          create limitations on the capabilities of the formats, which can impact which parties are
+          able to monetize the published/aggregated content. Values on this dimension can be
+          <em>open</em>, meaning the creator of the content has full control over how revenue is
+          derived from the work, or <em>limited</em> meaning the creator has to work within
+          artificial constraints.
         </dd>
       </dl>
     </section>
@@ -260,6 +270,15 @@
               <td><var>reasonable</var></td>
               <td>
                 All that the publisher needs to do is publish.
+              </td>
+            </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>open</var></td>
+              <td>
+                Publishers have full control over the advertising and subscription mechanisms for
+                their content. The onus is fully on publishers to maintain unique infrastructure
+                for their revenue model.
               </td>
             </tr>
           </tbody>
@@ -348,6 +367,15 @@
               <td>
                 Since these formats are entirely ad hoc and primarily focused on aggragator use
                 cases, publishers have to work to optimise aggregators' platforms.
+              </td>
+            </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>limited</var></td>
+              <td>
+                Publishers often have to work within the constraints on advertising instituted by
+                the aggregators. Support for subscription or login-controlled content is not
+                present or requires extra optimization on behalf of publishers.
               </td>
             </tr>
           </tbody>
@@ -445,6 +473,16 @@
                 over aggragator-dominated bundling.
               </td>
             </tr>
+            <tr>
+              <th>Revenue Model</th>
+              <td><var>open</var></td>
+              <td>
+                Publishers would be free to continue their existing revenue models based on users
+                viewing the full content, supported by unencumbered advertising or subscription
+                model. A collaborative hand-off between aggregators and publishers could be
+                possible using <a href="#transmissible-entitlement-tokens">entitlement tokens</a>.
+              </td>
+            </tr>
           </tbody>
           <caption>Assessment of the <em>Collaborative Syndication</em> architecture</caption>
         </table>
@@ -470,6 +508,10 @@
           These machine-readable (though at times presentation-oriented) features are enough to
           support user-friendly content preview and can be extended further.
         </p>
+        <p>An example implementation might borrow from or build upon Google's
+           <a href="https://github.com/WICG/portals"></a>portal proposal</p>, allowing publishers
+           to control the presentation of a HTML responsive preview that could conform to the needs
+           of aggregators, while maintaining privacy and performance.
       </section>
       <section>
         <h2>Improved Privacy-Preserving Prefetch</h2>
