@@ -90,9 +90,9 @@
     <section id="abstract">
       <p>
         This document analyses the respective merits of different approaches to content aggregation
-        on the Web, and builds atop this comparative analysis to outline an architecture and
-        requirements for a technology to support content aggregation as practiced today on the Web
-        by search engines, social media, and syndication services, in a manner that follows the
+        on the Web. It builds atop this comparative analysis to outline an architecture and
+        requirements for a technology to support content aggregation on the Web
+        (for search engines, social media, and syndication services), in a manner that follows the
         <a href="https://www.w3.org/TR/html-design-principles/#priority-of-constituencies">Priority
         of Constituencies</a>, notably in privileging user experience, user privacy, as well as
         simplicity and control for authors (also often known as "<em>publishers</em>")
@@ -131,19 +131,20 @@
       <p>
         In more recent times, a flurry of aggregator-dominated formats have emerged. They feature
         varying degrees of sophistication but have in common that they require publishers to recast
-        their content into a language covering a subset of the Web platform that can be limited, as
-        is the case with Accelerated Mobile Pages defined by Google and also used by Microsoft Bing
-        and Twitter [[AMP]], or severely limited, as with the Apple New Format [[APPLE-NEWS-FORMAT]]
-        or Facebook Instant Articles [[FBIA]]. These technologies have slightly different areas of
-        focus, which can be bundling for portals (AMP), for apps (ANF), or for social media (FBIA)
-        but from the perspective of users and publishers they are more alike than different as a
-        set of proprietary formats with largely comparable properties.
+        their content into a language covering a subset of the Web platform. These proprietary
+        languages range from limited, as is the case with Accelerated Mobile Pages defined by Google
+        (also used by Microsoft Bing and Twitter) [[AMP]], to severely limited, as with the Apple
+        New Format [[APPLE-NEWS-FORMAT]] or Facebook Instant Articles [[FBIA]]. These technologies
+        have slightly different areas of focus, which can be bundling for portals (AMP), for apps
+        (ANF), or for social media (FBIA) but from the perspective of users and publishers they are
+        more alike than different as a set of proprietary formats with largely comparable
+        properties.
       </p>
       <p>
         A more recent proposal, Web Packages [[WP]], has recently been discussed by the Web and
-        Internet communities. It attempts to make content distribution <em>look like</em> content
-        linking. While this does lead to some improvements (as discussed below) this proposal has
-        yet to garner any consensus.
+        Internet communities [[rfc8752]]. It attempts to make content distribution
+        <em>look like</em> content linking. While this does lead to some improvements (as discussed
+        below) this proposal has yet to garner any consensus.
       </p>
     </section>
     <section>
@@ -163,7 +164,7 @@
         <dt>User Privacy</dt>
         <dd>
           For simplicity, we treat violations of privacy as any information that leaks outside of
-          the direct relationship between the user on one side and the first party and its service
+          the direct relationship between the user on one side, and the first party and its service
           providers on the other (as defined in [[tracking-dnt]]). Values can be <em>optimal</em>
           just in case user privacy is not worsened by the aggregation architecture (endemic
           problems of privacy on the Web notwithstanding), or <em>degraded</em> if the architecture
@@ -183,14 +184,14 @@
         <dt>Publisher Level of Effort</dt>
         <dd>
           Several of the existing aggregations solutions ([[AMP]], [[APPLE-NEWS-FORMAT]], [[FBIA]],
-          [[WP]]) function by forcing publishers to take on the work to optimise aggregator
+          [[WP]]) function by forcing publishers to take on the work of optimising aggregator
           platforms under threats of losing their traffic or revenue. The philosophy of this
           document is encourage the development of an ecosystem that pushes towards the mutualistic
           end of the mutualistic-parasitic axis. Accordingly, the values along this dimension can be
           either <em>reasonable</em> when the publisher has simply to produce the content alongside
-          possibly some moderate effort to render it machine-readable, or <em>exploitative</em>
-          when the architecture levies work from publishers that is intended solely or primarily to
-          optimise the aggregator's platform.
+          possibly some moderate effort to render it machine-readable according to open standards,
+          or <em>exploitative</em> when the architecture levies work from publishers that is
+          intended solely or primarily to optimise the aggregator's platform.
         </dd>
         <dt>Revenue Model</dt>
         <dd>
