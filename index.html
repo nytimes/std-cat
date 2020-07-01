@@ -226,7 +226,7 @@
         <p>
           Linking enables a fundamental architectural property of the Web which is the separation
           of discoverability from distribution. This powerful feature is grounded in URLs, which are
-          the defining architectural decision of the Web and what initially set it apart from other
+          the defining architectural element of the Web and what initially set it apart from other
           hypertext systems (of which there were many).
         </p>
         <p>
@@ -308,17 +308,18 @@
             They attempt to limit what the Web platform can do. This helps aggregators treat content
             as a fungible commodity rather than as differentiated production grounded in craft. They
             also privilege aggregators (and runaway scale) by favouring <em>legibility</em> of the
-            content over <em>expressivity</em> [[SEEING-LIKE-A-STATE]].
+            content over <em>expressivity</em> and local knowledge of one's topic and audience
+            [[SEEING-LIKE-A-STATE]].
           </li>
           <li>
             They tend to optimise characteristics that define the aggregator/user relationship
             (particularly performance or uniformity) over those that prevail in publisher/user
-            relationship (experience). Put differently, they constitute a faster way to deliver a
-            degraded experience.
+            relationship (experience or trust). Put differently, they constitute a faster way to
+            deliver a degraded experience.
           </li>
           <li>
-            They make publisher perform the work to optimise the aggregator's offering as a levy
-            that must be discharged to maintain traffic or revenue. Little value is derived from the
+            They make publishers do work to optimise the aggregator's offering as a levy that must
+            be discharged to maintain traffic or revenue. Little value is derived from the
             aggregation architecture itself, and in fact "<em>several online publishers indicated
             that if it weren't for the privileged position in the Google Search carousel given to
             AMP content, they would not publish in that format.</em>" [[rfc8752]]
@@ -347,20 +348,20 @@
               <td><var>degraded</var></td>
               <td>
                 Technologies in this group try to shift relationships that users expect to have with
-                publishers to aggregators, sometimes even providing deceptive indications regarding
-                the URL from which the content is served, leading data to leak from a publisher
-                context to an aggregator context.
+                publishers towards relationships with aggregators instead, sometimes even providing
+                deceptive indications regarding the URL from which the content is served, leading
+                data to leak from a publisher context to an aggregator context.
               </td>
             </tr>
             <tr>
               <th>Content Preview</th>
               <td><var>supported</var></td>
               <td>
-                The legibility enables higher-quality preview of content. In some cases, essentially
-                the full content is loaded into a carousel but this use case is not considered here
-                because overriding another party's interaction modalities is considered excessively
-                hostile compared to the decisively consensual philosophy of this document.
-                [[CAROUSEL]]
+                The legibility enables higher-quality preview of content. Note: in some cases,
+                essentially the full content is loaded into a carousel but this use case is not
+                considered here because overriding another party's interaction modalities is
+                considered excessively hostile compared to the decisively mutualistic and consensual
+                philosophy of this document. [[CAROUSEL]]
               </td>
             </tr>
             <tr>
@@ -384,8 +385,10 @@
               <td><var>limited</var></td>
               <td>
                 Publishers often have to work within the constraints on advertising instituted by
-                aggregators. Support for subscription or login-controlled content is not
-                present or requires extra optimization on behalf of publishers.
+                aggregators, if that revenue model is available at all. Support for subscription or
+                login-controlled content is either not present, requires extra optimization on
+                behalf of publishers, or mandates that publishers use the aggregator's own
+                subscription system.
               </td>
             </tr>
           </tbody>
@@ -430,7 +433,7 @@
             <tr>
               <th>Dimension</th>
               <th>Value</th>
-              <th>Notes</th>
+              <th>Requirement</th>
             </tr>
           </thead>
           <tbody>
@@ -438,16 +441,17 @@
               <th>User Experience</th>
               <td><var>optimal</var></td>
               <td>
-                This is the Web platform.
+                Content is simply captured using the Web Platform, therefore its full power
+                available.
               </td>
             </tr>
             <tr>
               <th>User Privacy</th>
               <td><var>optimal</var></td>
               <td>
-                The user has distinct and clearly delineated relationships with separate first
-                parties being the aggregator and the publisher (especially with judicious
-                application of a <code>Referrer-Policy</code> [[referrer-policy]]).
+                Content is pointed to using links and distributed by publishers. Therefore, the user
+                has distinct and clearly delineated relationships with separate first parties being
+                the aggregator and the publisher.
               </td>
             </tr>
             <tr>
@@ -456,9 +460,9 @@
               <td>
                 An existing ecosystem of metadata, principally stemming from social media "card"
                 languages as well as from schema.org [[schema-org]] exists and is waiting for
-                nothing more than some further formalisation and extensions to render it more
-                powerful. The following section provides some examples of the direction in which
-                these existing capabilities could be developed.
+                nothing more than some further formalisation and extensions to render it capable of
+                more powerful previewing. The following section provides some high level examples of
+                the direction in which these existing capabilities could be developed.
               </td>
             </tr>
             <tr>
@@ -494,7 +498,7 @@
               </td>
             </tr>
           </tbody>
-          <caption>Assessment of the <em>Collaborative Syndication</em> architecture</caption>
+          <caption>Requirements for the <em>Collaborative Syndication</em> architecture</caption>
         </table>
       </section>
     </section>
@@ -512,27 +516,31 @@
           Multiple ways exist on today's Web to provide preview capabilities through "cards", used
           on social networks such as Facebook and Twitter, and reused by other parts of the
           ecosystem (eg. Slack or Keybase). Additionally, the schema.org language [[schema-org]],
-          incarnated through multiple syntaxes, is broadly used in content.
+          incarnated through multiple syntaxes, is widely used in content.
         </p>
         <p>
           These machine-readable (though at times presentation-oriented) features are enough to
           support user-friendly content preview and can be extended further.
         </p>
-        <p>Other implementations might borrow from or build upon Google's
-           <a href="https://github.com/WICG/portals">portal proposal</a>, allowing publishers
-           to control the presentation of a responsive preview that could conform to the needs
-           of aggregators, while maintaining privacy and performance.
+        <p>
+          Other implementations might borrow from or build upon Google's
+          <a href="https://github.com/WICG/portals">portal proposal</a>, allowing publishers
+          to control the presentation of a responsive preview that could conform to the needs
+          of aggregators, while maintaining privacy and performance.
         </p>
       </section>
       <section>
         <h2>Improved Privacy-Preserving Prefetch</h2>
         <p>
           Rather than relying on blurring the distinction between discoverability and distribution
-          as today's aggregator-dominated architecture tends to (and Web Packages furthers), the
-          Web would be better-served by improvements to standard prefetching capabilities. Notably,
-          publishers would be incentivised to collaborate with prefetching if it aligns with their
-          own distribution being faster. This could include providing bundles
-          (unsigned, served directly).
+          as today's aggregator-dominated architecture tends to (and SXG furthers), the Web would be
+          better-served by improvements to standard prefetching capabilities. Notably, publishers
+          would be incentivised to collaborate with prefetching if it aligns with their own
+          distribution being faster. This could include providing bundles (unsigned, served
+          directly). If there are performance benefits to be reaped from bundling, it would be
+          responsible to explore them first without modifying the Web's security model (ie. without
+          the signature part that allows bundle redistribution). If the value of bundling is proven
+          in practice, we can then talk about SXG.
         </p>
         <p>
           Additionally, user agents should be encouraged to develop support for IP privacy in
@@ -551,29 +559,45 @@
         <p>
           The ecosystem would globally benefit from enabling aggregators and publishers to share
           entitlement tokens that would prove that a given user is entitled to specific access.
-          This could take the form of a non-fungible token or of some sort of nonce provided as
-          part of the aggregator's linking to the publisher (possibly mediated by the user agent).
+          This would enable business models in which publishers and aggregators work together on
+          generating revenue according to their respective participation.
+        </p>
+        <p>
+          implementation-wise, this could take the form of a non-fungible token or of some sort of
+          nonce provided as part of the aggregator's linking to the publisher (possibly mediated by
+          the user agent).
         </p>
       </section>
       <section>
         <h2>Machine-Readable Distribution Licenses</h2>
         <p>
           The terms under which aggregators use and reuse publisher content are often decided
-          unilaterally. This could be improved for instance through the provision of
+          unilaterally (by the aggregator). This could be improved through the provision of
           machine-readable licenses that could for instance allow citation for the purpose of
           linking but not to provide direct answers, or could grant reuse rights for some pictures
           as part of a portal but not rights to mine the text to train digital assistants with.
         </p>
       </section>
+      <section>
+        <h2>Addressing In-App Browsers</h2>
+        <p>
+          Some aggregators run applications that embed Web rendering components that they use
+          instead of a user's chosen browser. This practice, known as "in-app browsers", is an
+          antipattern that causes countless problems with users not being logged in to publisher
+          sites and not having their browsing preferences respected.
+        </p>
+        <p>
+          This practice also unfairly attempts to keep users on the aggregator's property instead of
+          letting users access the Web properly. Since the user's chosen agent is being substituted,
+          the opportunity for privacy violations is rampant.
+        </p>
+        <p>
+          While banning this practice entirely may be beyond the reach of the standards process,
+          it would be desirable for browser engines to support an in-app busting HTTP header that
+          would enable publishers to break out of aggregator apps trying to jail in their experience
+          and to keep tracking user behaviour while users believe they are on another property.
+        </p>
+      </section>
     </section>
-    <!--
-      * Include discussion of outreach to AMP AC for a planned phase-out of AMP, along with
-        standardisation of what parts might be worth saving, if any?
-      * Include proposal to cease work on WP?
-      * Internal review?
-      * Sigs? Moz, FB, FT, WaPo, DCN, NMA, EPIC, EFF, Consumer Reports, CDT, NPR, Guardian, WSJ.
-      * Should include mention that the default browser of the platform is superior to the in-app
-        browser.
-    -->
   </body>
 </html>
