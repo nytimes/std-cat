@@ -81,12 +81,19 @@
             href: 'https://bookshop.org/books/seeing-like-a-state-how-certain-schemes-to-improve-the-human-condition-have-failed/9780300246759',
             authors: ['James C. Scott'],
           },
-          WP: {
-            title: 'Web Packages',
-            href: 'https://github.com/WICG/webpackage',
+          'WEB-BUNDLES': {
+            title: 'Web Bundles',
+            href: 'https://wicg.github.io/webpackage/draft-yasskin-wpack-bundled-exchanges.html',
             authors: ['Jeffrey Yasskin'],
-            date: '07 May 2020',
-            status: 'Draft (index page for split specification)',
+            date: '11 September 2020',
+            status: 'Draft',
+          },
+          'WEB-BUNDLES-USE-CASES': {
+            title: 'Use Cases and Requirements for Web Packages',
+            href: 'https://wicg.github.io/webpackage/draft-yasskin-wpack-use-cases.html',
+            authors: ['Jeffrey Yasskin'],
+            date: '11 September 2020',
+            status: 'Draft',
           },
         },
       };
@@ -120,6 +127,17 @@
         multiple embodiments over the decades. This historical perspective allows us to tease out
         best practices from ones that produce problematic outcomes.
       </p>
+      <p>
+        One difficulty that should be called out is that it is challenging to enable aggregation
+        without increasing centralisation, and with that the control of the centralising entity.
+        The easy way out is to copy non-Web solutions and have content centralised with the
+        aggregator. The Web already resembles a proprietary application store: an
+        increasingly centralised source of discovery which is also the single source of revenue.
+        This document is written with the assumption that competing with proprietary application
+        stores by mimicking their architectural characteristics is not a desirable direction.
+        Improvements upon the status quo should instead play to the Web's strengths and seek to
+        increase decentralisation.
+      </p>
     </section>
     <section>
       <h2>Brief Overview of Existing Solutions</h2>
@@ -147,10 +165,12 @@
         properties.
       </p>
       <p>
-        A more recent proposal, Web Packages [[WP]], has recently been discussed by the Web and
+        A more recent proposal, Web Bundles [[WEB-BUNDLES]], has recently been discussed by the Web and
         Internet communities [[rfc8752]]. It attempts to make content distribution
-        <em>look like</em> content linking. While this does lead to some improvements (as discussed
-        below) this proposal has yet to garner any consensus.
+        <em>look like</em> content linking but while cutting publishers out of the distribution of
+        their own content. While this does lead to some improvements over other options and on
+        several axes it is the least hostile of the proprietary options (as discussed below) this
+        proposal has yet to garner any consensus.
       </p>
     </section>
     <section>
@@ -346,7 +366,7 @@
               <td>
                 Every technology in this architecture class degrades the user experience by limiting
                 the capabilities of the Web platform to those deemed useful and legible by the
-                aggregator. Web Packages [[WP]] attempts principally to solve this issue.
+                aggregator. Web Bundles [[WEB-BUNDLES]] attempts principally to solve this issue.
               </td>
             </tr>
             <tr>
@@ -539,14 +559,24 @@
         <h2>Improved Privacy-Preserving Prefetch</h2>
         <p>
           Rather than relying on blurring the distinction between discoverability and distribution
-          as today's aggregator-dominated architecture tends to (and SXG furthers), the Web would be
-          better-served by improvements to standard prefetching capabilities. Notably, publishers
-          would be incentivised to collaborate with prefetching if it aligns with their own
-          distribution being faster. This could include providing bundles (unsigned, served
-          directly). If there are performance benefits to be reaped from bundling, it would be
-          responsible to explore them first without modifying the Web's security model (ie. without
-          the signature part that allows bundle redistribution). If the value of bundling is proven
-          in practice, we can then talk about SXG.
+          as today's aggregator-dominated architecture tends to (and [[WEB-BUNDLES]] further), the
+          Web would be better-served by improvements to standard prefetching capabilities.
+        </p>
+        <p>
+          Notably, publishers would be incentivised to collaborate with prefetching if it aligns
+          with their own distribution being faster rather than forklift their content to be served
+          by a third party while misleading the user as to where the content was loaded from [[WEB-BUNDLES]]. This
+          could include providing bundles (unsigned, served directly), if that indeed proves faster
+          than alternative HTTP2 mechanisms.
+        </p>
+        <p>
+          It should be noted that loading someone else's content without fetching from their site is
+          explictly not a use case of this document. A publisher's site should either be loaded
+          directly from them (or one of their contracted delegates, such as a CDN in their employ).
+          The explicitly stated goal of [[WEB-BUNDLES]] is to load a publisher's content
+          while excluding the publisher from the transaction ("<em>This attempt is instead motivated
+          by avoiding a connection to the origin server at all.</em>" [[WEB-BUNDLES-USE-CASES]]).
+          This makes it a solution everything but cooperative.
         </p>
         <p>
           Additionally, user agents should be encouraged to develop support for IP privacy in
